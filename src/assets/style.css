@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300&display=swap');
+
+#app {
+    padding: 10px;
+    font-family: "Fredoka", sans-serif;
+}
+
+.linea {
+    background-color: black;
+    height: 1px;
+    border: 0px;
+}
+
+.btn {
+    background-color: #dddddd !important;
+    font-size: 200px;
+    height: fit-content;
+    margin-left: 10px;
+    width: 70px;
+}
+
+.card-img-top {
+    height: 100px;
+    width: 300px;
+}

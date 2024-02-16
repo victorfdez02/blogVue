@@ -1,47 +1,38 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div>
+    <Header />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div class="container">
+      <div class="row">
+        <Card v-for="post in posts" :key="post.id" :post="post" />
+      </div>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup>
+import Header from './components/Header.vue'
+import Card from './components/Card.vue'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+import { ref, onMounted } from 'vue';
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+const posts = ref([]);
+
+const pedirPosts = async () => {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const data = await res.json();
+    posts.value = data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
   }
+};
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+onMounted(() => {
+  pedirPosts();
+});
+</script>
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<script>
+import 'bootstrap/dist/css/bootstrap.min.css';
+</script>
